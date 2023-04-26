@@ -51,6 +51,8 @@ def construct_index(uploaded_files):
 
     index.save_to_disk(index_file)    
 
+    st.session_state.index = index
+
     for uploaded_file in uploaded_files:
         sidebar_placeholder.subheader(uploaded_file.name)
         sidebar_placeholder.write(documents[0].get_text()[:1000]+'...')
@@ -90,6 +92,8 @@ else:
 def handle_response():
     print(st.session_state.prompt)
     if st.session_state.prompt == '':
+        return
+    if st.session_state.index is None:
         return
     response = index.query(st.session_state.prompt)
     st.session_state.history.append(response)
