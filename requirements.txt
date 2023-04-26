@@ -1,0 +1,5 @@
+# Path: requirements.txt
+streamlit
+pandas
+llama-index
+
